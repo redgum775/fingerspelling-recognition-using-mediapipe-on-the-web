@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Fingerspelling Recogniotion using Mediapipe on the Web</title>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-logo">
+        <a href="index.html"  style="pointer-events: none;">
+          <img src="assets/img/logo/redgum_logo.png" width="48" height="48" alt="Redgum Logo">
+          Redgum Lab
+        </a>
+      </div>
+      <div style="margin-left: auto;">
+        <ul class="header-list">
+          <li><a href="redgum_lab/index.html" style="pointer-events: none;">Home</a></li>
+          <li><a href="redgum_lab/index.html#profile" style="pointer-events: none;">Profile</a></li>
+          <li><a href="redgum_lab/index.html#archive" style="pointer-events: none;">Archive</a></li>
+          <li><a href="redgum_lab/index.html#contact" style="pointer-events: none;">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <div class="wrapper">
+      <div class="container">
+        <div id="fingerspelling-recognition">
+          <h2>Fingerspelling Recogniotion using Mediapipe on the Web</h2>
+          <p>（訳: Web上でMediaPipeを使った指文字認識）</p><br>
+          <div class="fingerspelling-recognition">
+            <video class="input-video" hidden></video>
+            <canvas class="output-canvas" width="640px" height="480px"></canvas>
+          </div>
+          <div>
+            <p class="result-text">認識結果: <span class="result">_</span></p>
+          </div>
+          <br>
+          <p>
+            <a href="https://google.github.io/mediapipe/solutions/hands">MediaPipe Hands</a>を用いて手の姿勢推定を行い、取得した手の形状パラメータを用いて機械学習により、かな指文字を分類するプログラムです。また、こちらは<a href="https://github.com/redgum775/fingerspelling-recognition-using-mediapipe">Fingerspelling Recognition using MediaPipe</a>のWeb版です。TensorFlow.jsでTensorflow Liteの指文字分類モデルを動かしています。
+          </p>
+          <br>
+          <p>GitHub: <a href="https://github.com/redgum775/fingerspelling-recognition-using-mediapipe-on-the-web">fingerspelling-recognition-using-mediapipe-on-the-web</a></p>  
+        </div>
+        <!--
+        <a href="#fingerspelling-recognition">ページの先頭へ</a>
+        -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-logo">
+        <a href="index.html"  style="pointer-events: none;">
+          <img src="assets/img/logo/redgum_logo.png" width="64" height="64" alt="Redgum Logo">
+          Redgum Lab
+        </a>
+      </div>
+      <p class="copyright">Copyright&copy; 2022 Redgum. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Import @tensorflow/tfjs-core -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <!-- Adds the CPU backend -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu"></script>
+    <!-- Import @tensorflow/tfjs-tflite -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script>
+
+    <!-- Import MediaPipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+    <!-- Run Fingerspelling Recognition -->
+    <script type="module" src="script/model/fingerspelling_classification.js" charset="utf-8"></script>
+    <script type="module" src="script/utils/utils.js" charset="utf-8"></script>
+    <script type="module" src="script/fingerspelling_recognition.js" charset="utf-8"></script>
+
+    <!-- Page jump -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="script/page_jump.js"></script>
+  </body>
+</html>
