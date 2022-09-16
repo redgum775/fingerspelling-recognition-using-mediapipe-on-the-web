@@ -8,6 +8,19 @@ import { calcEcplantoryVaribles, get_bounding_rect_top_left } from "./utils/util
 
 const model = new JaSpellingClassification()
 
+// スマートフォン対応（Canvas size）
+function isSmartPhone() {
+  if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+if(isSmartPhone()){
+  canvasElement.width = 320;
+  canvasElement.height = 240;
+}
+
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
