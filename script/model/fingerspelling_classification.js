@@ -1,4 +1,3 @@
-
 export class JaSpellingClassification{
   constructor(){
     this.modelLoad()
