@@ -62,10 +62,10 @@ function onResults(results) {
       const pos = get_bounding_rect_top_left(landmarks, canvasElement.width, canvasElement.height);
       var text = canvasCtx.measureText(result);
       // テキストの背景を描画（図形の描画）
-      canvasCtx.fillStyle = '#000000';
+      canvasCtx.fillStyle = '#00000080';
       canvasCtx.fillRect(pos[0] - 5, pos[1] - 50, text.width*6, text.width*6);
       // テキストの描画
-      canvasCtx.fillStyle = '#ffffff';
+      canvasCtx.fillStyle = '#ffffffff';
       canvasCtx.font = '3em serif';
       canvasCtx.fillText(result, pos[0], pos[1]);
     }
