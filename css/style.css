@@ -69,11 +69,13 @@ header a:active{
 }
 
 .fingerspelling-recognition {
+  width: 80%;
   margin: 0 auto;
 }
 
 .output-canvas {
   background-color: #252525;
+  width: 100%;
 }
 
 .result-text {
