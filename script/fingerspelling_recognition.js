@@ -4,7 +4,7 @@ const pElement = document.getElementsByClassName('result')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
 import { JaSpellingClassification } from "./model/fingerspelling_classification.js";
-import { calcEcplantoryVaribles, get_bounding_rect_top_left } from "./utils/utils.js";
+import { calcExplanatoryVariable, get_bounding_rect_top_left } from "./utils/utils.js";
 
 const model = new JaSpellingClassification()
 
