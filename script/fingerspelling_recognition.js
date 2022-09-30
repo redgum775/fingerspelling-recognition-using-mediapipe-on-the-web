@@ -52,8 +52,8 @@ function onResults(results) {
       drawLandmarks(canvasCtx, landmarks, {color: '#ff0000', lineWidth: 0.5});
 
       // 指文字分類タスク
-      const explanatoryVariables = calcEcplantoryVaribles(landmarks, worldLandmarks, handedness);
-      model.updateData(explanatoryVariables);
+      const explanatoryVariable = calcExplanatoryVariable(landmarks, worldLandmarks, handedness);
+      model.updateInputData(explanatoryVariable);
       const result = model.classification();
       pElement.textContent = result;
 

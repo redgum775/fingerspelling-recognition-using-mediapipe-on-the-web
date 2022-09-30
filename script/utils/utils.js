@@ -1,13 +1,13 @@
-export const calcEcplantoryVaribles = (landmarks, worldLandmarks, handedness) =>{
-  let explanatoryVariables = calcJointAngles(worldLandmarks);
-  explanatoryVariables.push(calcDirectionAngle(worldLandmarks));
-  explanatoryVariables.push(isPlamFacing(landmarks, handedness));
-  explanatoryVariables.push(calcDistance(worldLandmarks[4], worldLandmarks[8]));
-  explanatoryVariables.push(calcDistance(worldLandmarks[4], worldLandmarks[12]));
-  explanatoryVariables.push(calcDistance(worldLandmarks[8], worldLandmarks[12]));
-  // explanatoryVariables.push((isIntersect(worldLandmarks[7], worldLandmarks[8], worldLandmarks[11], worldLandmarks[12]) | isIntersect(worldLandmarks[6], worldLandmarks[7], worldLandmarks[10], worldLandmarks[11])) ? 1 : 0);
-  // console.log(explanatoryVariables);
-  return explanatoryVariables;
+export const calcExplanatoryVariable = (landmarks, worldLandmarks, handedness) =>{
+  let explanatoryVariable = calcJointAngles(worldLandmarks);
+  explanatoryVariable.push(calcDirectionAngle(worldLandmarks));
+  explanatoryVariable.push(isPlamFacing(landmarks, handedness));
+  explanatoryVariable.push(calcDistance(worldLandmarks[4], worldLandmarks[8]));
+  explanatoryVariable.push(calcDistance(worldLandmarks[4], worldLandmarks[12]));
+  explanatoryVariable.push(calcDistance(worldLandmarks[8], worldLandmarks[12]));
+  // explanatoryVariable.push((isIntersect(worldLandmarks[7], worldLandmarks[8], worldLandmarks[11], worldLandmarks[12]) | isIntersect(worldLandmarks[6], worldLandmarks[7], worldLandmarks[10], worldLandmarks[11])) ? 1 : 0);
+  // console.log(explanatoryVariable);
+  return explanatoryVariable;
 }
 
 const calc2DAngle = (p1, p2, p3={x: 0, y: 0}) => {

@@ -22,7 +22,7 @@ export class JaSpellingClassification{
                     0.03914316214105014, 0.03143124562422413
             ];
     this.timestep = 10;
-    this.explanatoryVariables = [];
+    this.inputData = [];
   }
 
   async modelLoad(){
@@ -30,8 +30,8 @@ export class JaSpellingClassification{
   }
 
   classification(){
-    if(this.explanatoryVariables.length == 10){
-      const input = tf.tensor3d([this.explanatoryVariables]);
+    if(this.inputData.length == 10){
+      const input = tf.tensor3d([this.inputData]);
       const result = this.model.predict(input).arraySync();
       return this.indices_char(this.maxIndex(result[0]));
     }else{
@@ -39,14 +39,14 @@ export class JaSpellingClassification{
     }
   }
 
-  updateData(data){
-    let tmp = [];
+  updateInputData(explanatoryVariable){
+    let standardizedExplanatoryVariable = [];
     for(let i = 0; i < 20; i++){
-      tmp.push((data[i] - this.mean[i]) / this.scale[i]);
+      standardizedExplanatoryVariable.push((explanatoryVariable[i] - this.mean[i]) / this.scale[i]);
     }
-    this.explanatoryVariables.push(tmp);
-    if(this.explanatoryVariables.length > this.timestep){
-      this.explanatoryVariables.shift();
+    this.inputData.push(standardizedExplanatoryVariable);
+    if(this.inputData.length > this.timestep){
+      this.inputData.shift();
     }
   }
 
