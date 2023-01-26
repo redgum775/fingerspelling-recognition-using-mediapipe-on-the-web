@@ -52,7 +52,8 @@ function onResults(results) {
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
   if (results.multiHandLandmarks) {
-    for (const [landmarks, worldLandmarks, handedness] of zip(results.multiHandLandmarks, results.multiHandWorldLandmarks, results.multiHandedness)){
+    for (const [landmarks, worldLandmarks, handedness]
+          of zip(results.multiHandLandmarks, results.multiHandWorldLandmarks, results.multiHandedness)){
       // MediaPipeで取得した手の形状をCanvasに描画
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00ff00', lineWidth: 3});                 
       drawLandmarks(canvasCtx, landmarks, {color: '#ff0000', lineWidth: 0.5});
