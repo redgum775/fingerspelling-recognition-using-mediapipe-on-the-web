@@ -73,6 +73,20 @@ export const get_bounding_rect = (landmarks, width, height) => {
   }
   return [parseInt(minX), parseInt(minY), parseInt(maxX), parseInt(maxY)];
 }
+
+export const get2byteLength = (text) => {
+  /**
+   * 半角を0.5、全角を1としたときの文字列の長さを返す
+   * return: textLength
+   */
+  let textLength = 0;
+  for(let i = 0; i < text.length; i++){
+    let character = text.charCodeAt(i) ;
+    if (character >= 0x0 && character <= 0x7f) { 
+      textLength += 0.5 ;
+    } else { 
+      textLength += 1;
+    }
   }
-  return [parseInt(minX), parseInt(minY)];
+  return textLength;
 }
