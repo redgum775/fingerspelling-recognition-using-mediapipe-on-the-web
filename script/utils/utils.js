@@ -1,7 +1,7 @@
 export const calcExplanatoryVariable = (landmarks, worldLandmarks, handedness) =>{
   let explanatoryVariable = calcJointAngles(worldLandmarks);
   explanatoryVariable.push(calcDirectionAngle(worldLandmarks));
-  explanatoryVariable.push(isPlamFacing(landmarks, handedness));
+  explanatoryVariable.push(isPalmFacing(landmarks, handedness));
   explanatoryVariable.push(calcDistance(worldLandmarks[4], worldLandmarks[8]));
   explanatoryVariable.push(calcDistance(worldLandmarks[4], worldLandmarks[12]));
   explanatoryVariable.push(calcDistance(worldLandmarks[8], worldLandmarks[12]));
