@@ -57,12 +57,22 @@ const isIntersect = (p1, p2, p3, p4) => {
   return t1 * t2 <= 0 && t3 * t4 <= 0;
 }
 
-export const get_bounding_rect_top_left = (landmarks, width, height) => {
+export const get_bounding_rect = (landmarks, width, height) => {
+  /**
+   * return: 左端, 上端, 右端, 下端
+   */
   let minX = width;
   let minY = height;
+  let maxX = 0;
+  let maxY = 0;
   for(const landmark of landmarks){
     if(minX > landmark["x"] * width) minX = landmark["x"] * width;
     if(minY > landmark["y"] * height) minY = landmark["y"] * height;
+    if(maxX < landmark["x"] * width) maxX = landmark["x"] * width;
+    if(maxY < landmark["y"] * height) maxY = landmark["y"] * height;
+  }
+  return [parseInt(minX), parseInt(minY), parseInt(maxX), parseInt(maxY)];
+}
   }
   return [parseInt(minX), parseInt(minY)];
 }
