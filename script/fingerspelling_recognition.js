@@ -1,6 +1,5 @@
 const videoElement = document.getElementsByClassName('input-video')[0];
 const canvasElement = document.getElementsByClassName('output-canvas')[0];
-const pElement = document.getElementsByClassName('result')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
 import { JaSpellingClassification } from "./model/fingerspelling_classification.js";
@@ -11,6 +10,8 @@ const model = new JaSpellingClassification()
 const WHITE = '#ffffffff'
 const BLACK = '#000000ff'
 const GREEN = '#00ff00ff'
+const BASE_FONTSIZE = 16
+const FONTSIZE_MAGNIFICATION = 3;
 const BOUNDING_BOX_PADDING = 20
 
 const isSmartPhone = navigator.userAgent.match(/iPhone|Android.+Mobile/);
@@ -60,6 +61,7 @@ function onResults(results) {
       const explanatoryVariable = calcExplanatoryVariable(landmarks, worldLandmarks, handedness);
       model.updateInputData(explanatoryVariable);
       const result = model.classification();
+      const text = "result:" + result; 
       
       // 手の左端、上端、右端、下端の座標を取得
       const pos = get_bounding_rect(landmarks, canvasElement.width, canvasElement.height);
@@ -73,16 +75,18 @@ function onResults(results) {
       );
 
       // 分類結果をCanvasに出力
-      // 手の左上の座標を取得 pos = [x, y];
-      const pos = get_bounding_rect_top_left(landmarks, canvasElement.width, canvasElement.height);
-      var text = canvasCtx.measureText(result);
-      // テキストの背景を描画（図形の描画）
-      canvasCtx.fillStyle = '#00000080';
-      canvasCtx.fillRect(pos[0] - 5, pos[1] - 50, text.width*6, text.width*6);
+      // テキストの背景を描画
+      canvasCtx.fillStyle = GREEN;
+      canvasCtx.fillRect(
+        pos[0] - BOUNDING_BOX_PADDING,
+        pos[1] - BOUNDING_BOX_PADDING - (BASE_FONTSIZE * FONTSIZE_MAGNIFICATION),
+        BASE_FONTSIZE * FONTSIZE_MAGNIFICATION * get2byteLength(text),
+        BASE_FONTSIZE * FONTSIZE_MAGNIFICATION
+      );
       // テキストの描画
-      canvasCtx.fillStyle = '#ffffffff';
-      canvasCtx.font = '3em serif';
-      canvasCtx.fillText(result, pos[0], pos[1]);
+      canvasCtx.fillStyle = BLACK;
+      canvasCtx.font = FONTSIZE_MAGNIFICATION + 'em serif';
+      canvasCtx.fillText(text, pos[0] , pos[1] - BOUNDING_BOX_PADDING);
     }
   }
   canvasCtx.restore();
