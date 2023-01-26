@@ -1,4 +1,4 @@
-export const calcExplanatoryVariable = (landmarks, worldLandmarks, handedness) =>{
+export const calcExplanatoryVariable = (landmarks, worldLandmarks, handedness) => {
   let explanatoryVariable = calcJointAngles(worldLandmarks);
   explanatoryVariable.push(calcDirectionAngle(worldLandmarks));
   explanatoryVariable.push(isPalmFacing(landmarks, handedness));
