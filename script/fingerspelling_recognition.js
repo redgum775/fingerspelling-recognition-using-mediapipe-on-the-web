@@ -4,21 +4,15 @@ const pElement = document.getElementsByClassName('result')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
 import { JaSpellingClassification } from "./model/fingerspelling_classification.js";
-import { calcExplanatoryVariable, get_bounding_rect_top_left } from "./utils/utils.js";
+import { calcExplanatoryVariable, get_bounding_rect, get2byteLength } from "./utils/utils.js";
 
 const model = new JaSpellingClassification()
 
-// スマートフォン対応（Canvas size）
-function isSmartPhone() {
-  if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-if(isSmartPhone()){
-  canvasElement.width = 320;
-  canvasElement.height = 240;
+const WHITE = '#ffffffff'
+const BLACK = '#000000ff'
+const GREEN = '#00ff00ff'
+const BOUNDING_BOX_PADDING = 20
+
 }
 
 const camera = new Camera(videoElement, {
@@ -55,7 +49,17 @@ function onResults(results) {
       const explanatoryVariable = calcExplanatoryVariable(landmarks, worldLandmarks, handedness);
       model.updateInputData(explanatoryVariable);
       const result = model.classification();
-      pElement.textContent = result;
+      
+      // 手の左端、上端、右端、下端の座標を取得
+      const pos = get_bounding_rect(landmarks, canvasElement.width, canvasElement.height);
+      // 手の周りに枠線を描画
+      canvasCtx.strokeStyle = GREEN;
+      canvasCtx.strokeRect(
+        pos[0] - BOUNDING_BOX_PADDING,
+        pos[1] - BOUNDING_BOX_PADDING,
+        pos[2] - pos[0] + BOUNDING_BOX_PADDING*2,
+        pos[3] - pos[1] + BOUNDING_BOX_PADDING*2
+      );
 
       // 分類結果をCanvasに出力
       // 手の左上の座標を取得 pos = [x, y];
