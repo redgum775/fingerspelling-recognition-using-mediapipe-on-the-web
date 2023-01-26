@@ -13,14 +13,25 @@ const BLACK = '#000000ff'
 const GREEN = '#00ff00ff'
 const BOUNDING_BOX_PADDING = 20
 
+const isSmartPhone = navigator.userAgent.match(/iPhone|Android.+Mobile/);
+const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+
+// キャンパスの縦横比を端末と画面に応じて変更
+if(isSmartPhone && !isPortrait){
+  canvasElement.width = 640;
+  canvasElement.height = 480;
+}else if(isSmartPhone && isPortrait){
+  canvasElement.width = 480;
+  canvasElement.height = 640;
 }
 
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
   },
-  width: 640,
-  height: 480
+  // カメラの縦横比を端末と画面に応じて変更
+  width: !isSmartPhone ? 640 : (isPortrait ? 480 : 640),
+  height: !isSmartPhone ? 480 : (isPortrait ? 640 : 480)
 });
 camera.start();
 
