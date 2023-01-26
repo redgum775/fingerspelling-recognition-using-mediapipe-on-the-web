@@ -38,7 +38,7 @@ const calcDirectionAngle = (landmarks) => {
   return calc2DAngle(landmarks[0], landmarks[9]);
 }
 
-const isPlamFacing = (landmarks, handedness) => {
+const isPalmFacing = (landmarks, handedness) => {
   const angle = calc2DAngle(landmarks[0], landmarks[9]);
   const up = (45 <= angle &&  angle <= 125) ? -1 : 1;
   const side = (handedness["label"] == "Right") ? 1 : -1;
