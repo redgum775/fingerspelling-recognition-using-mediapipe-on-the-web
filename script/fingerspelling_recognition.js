@@ -30,9 +30,6 @@ const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({image: videoElement});
   },
-  // カメラの縦横比を端末と画面に応じて変更
-  width: !isSmartPhone ? 640 : (isPortrait ? 480 : 640),
-  height: !isSmartPhone ? 480 : (isPortrait ? 640 : 480)
 });
 camera.start();
 
